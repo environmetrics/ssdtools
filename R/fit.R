@@ -31,7 +31,13 @@ add_starting_values <- function(dist, x) {
     )
   } else if (dist$distr == "llog") {
     dist$start <- list(shape = mean(log(x)), scale = pi * stats::sd(log(x)) / sqrt(3))
-  } else if (dist$distr == "pareto") {
+  } else if(dist$distr == "lnormlnorm" ){
+    dist$start <- list(meanlog1 = mean(log(x)), sdlog1 = sd(log(x))/2, 
+                       meanlog2 = mean(log(x)), sdlog2 = sd(log(x))/2, r = 0.5)
+    dist$lower <- c(min(log(x)), 0, min(log(x)), 0, 0.1)
+    dist$upper <- c(max(log(x)), Inf, max(log(x)), Inf, 0.9)   
+  }
+  else if (dist$distr == "pareto") {
     fit <- vglm(x ~ 1, VGAM::paretoff)
     dist$start <- list(shape = exp(unname(coef(fit))))
     dist$fix.arg <- list(scale = fit@extra$scale)

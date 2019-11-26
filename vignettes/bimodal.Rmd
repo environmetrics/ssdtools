@@ -1,0 +1,23 @@
+---
+title: "bimodal"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{bimodal}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ssdtools)
+
+boron_dists <- ssd_fit_dists(ssdtools::boron_data, dists = c("lnorm", "gamma", "lnormlnorm"))
+
+ssd_gof(boron_dists)
+```
