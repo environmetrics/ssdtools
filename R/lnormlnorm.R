@@ -39,17 +39,13 @@ plnormlnorm <- function(q, meanlog1 = 0, sdlog1= 1, meanlog2 = 3, sdlog2 = 1, r 
 #' @rdname lnormlnorm
 #' @export
 qlnormlnorm <- function(p, meanlog1 = 0, sdlog1 = 1, meanlog2 = 3, sdlog2 = 1, r = 0.5, lower.tail = TRUE, log.p = FALSE){
-  if(p==1) p <- 1-.Machine$double.eps
-  if(p==0) p <- 0+.Machine$double.eps
-  interval <- c(0+.Machine$double.eps, 10^10)
-  
   f <- function(x) {
-    plnormlnorm(x, meanlog1, sdlog1, meanlog2, sdlog2, r) - p
+    plnormlnorm(exp(x), meanlog1, sdlog1, meanlog2, sdlog2, r) - p
   }
-  q <- uniroot(f, interval = interval)$root
+  q <- uniroot(f, interval = c(-22,22))$root
   if(!lower.tail) q <- 1 - q
-  if(log.p) return(log(q))
-  q
+  if(log.p) return(q)
+  exp(q)
 }
 
 #' @rdname lnormlnorm
