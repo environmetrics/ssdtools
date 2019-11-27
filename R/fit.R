@@ -48,7 +48,7 @@ add_starting_values <- function(dist, x) {
 fit_dist_uncensored <- function(data, left, weight, dist) {
   x <- data[[left]]
 
-  dist <- list(data = x, distr = dist, method = "mle")
+  dist <- list(data = x, distr = dist, method = "mle", control = list(trace = 1, REPORT = 1))
 
   if (!is.null(weight)) {
     dist$weights <- data[[weight]]

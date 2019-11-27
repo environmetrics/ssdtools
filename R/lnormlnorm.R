@@ -21,6 +21,7 @@ NULL
 #' @rdname lnormlnorm
 #' @export
 dlnormlnorm <- function(x, meanlog1 = 0, sdlog1 = 1, meanlog2 = 3, sdlog2 = 1, r = 0.5, log = FALSE){
+#  print(c(meanlog1, sdlog1, meanlog2, sdlog2, r))
   density <- r * dlnorm(x,meanlog1,sdlog1) + (1 - r) * dlnorm(x, meanlog2, sdlog2)
   if(log) return(log(density))
   density
