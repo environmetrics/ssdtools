@@ -3,18 +3,44 @@
 \name{lnormlnorm}
 \alias{lnormlnorm}
 \alias{dlnormlnorm}
-\alias{qlnormlnorm}
 \alias{plnormlnorm}
+\alias{qlnormlnorm}
 \alias{rlnormlnorm}
 \title{Log Normal-Log Normal Mixture Distribution}
 \usage{
-dlnormlnorm(x, meanlog1 = 0, sdlog1 = 1, meanlog2 = 1, sdlog2 = 0, r = 0.5)
+dlnormlnorm(
+  x,
+  meanlog1 = 0,
+  sdlog1 = 1,
+  meanlog2 = 3,
+  sdlog2 = 1,
+  r = 0.5,
+  log = FALSE
+)
 
-qlnormlnorm(p, meanlog1 = 0, sdlog1 = 1, meanlog2 = 0, sdlog2 = 1, r = 0.5)
+plnormlnorm(
+  q,
+  meanlog1 = 0,
+  sdlog1 = 1,
+  meanlog2 = 3,
+  sdlog2 = 1,
+  r = 0.5,
+  lower.tail = TRUE,
+  log.p = FALSE
+)
 
-plnormlnorm(q, meanlog1 = 0, sdlog1 = 1, meanlog2 = 1, sdlog2 = 1, r = 0.5)
+qlnormlnorm(
+  p,
+  meanlog1 = 0,
+  sdlog1 = 1,
+  meanlog2 = 3,
+  sdlog2 = 1,
+  r = 0.5,
+  lower.tail = TRUE,
+  log.p = FALSE
+)
 
-rlnormlnorm(n, meanlog1 = 0, sdlog1 = 1, meanlog2 = 1, sdlog2 = 1, r = 0.5)
+rlnormlnorm(n, meanlog1 = 0, sdlog1 = 1, meanlog2 = 3, sdlog2 = 1, r = 0.5)
 }
 \arguments{
 \item{x, q}{vector of quantiles.}
@@ -25,6 +51,10 @@ rlnormlnorm(n, meanlog1 = 0, sdlog1 = 1, meanlog2 = 1, sdlog2 = 1, r = 0.5)
 
 \item{r}{proportion of the first mixture.}
 
+\item{log, log.p}{logical; if TRUE, probabilitise p are given as log(p).}
+
+\item{lower.tail}{logical; if TRUE (default), probabilities are \code{P[X ≤ x]}, otherwise, \code{P[X > x]}.}
+
 \item{p}{vector of probabilities.}
 
 \item{n}{number of observations. 
@@ -34,4 +64,7 @@ taken to be the number required.}
 \description{
 Density, distribution function, quantile function and random generation
 for the log-normal log-normal mixture distribution.
+}
+\examples{
+hist(log(rlnormlnorm(1e+05)))
 }
