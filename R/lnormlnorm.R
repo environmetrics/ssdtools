@@ -11,7 +11,7 @@
 #' @param meanlog2,sdlog2 mean and standard deviation of the distribution on the log scale of the second mixture with default values of 1 and 1 respectively.
 #' @param r proportion of the first mixture.
 #' @param log,log.p logical; if TRUE, probabilitise p are given as log(p).
-#' @param lower.tail logical; if TRUE (default), probabilities are \code{P[X ≤ x]}, otherwise, \code{P[X > x]}.
+#' @param lower.tail logical; if TRUE (default), probabilities are \code{P[X <= x]}, otherwise, \code{P[X > x]}.
 #' 
 #' @name lnormlnorm
 #' @examples

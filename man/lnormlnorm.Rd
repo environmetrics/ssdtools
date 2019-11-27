@@ -53,7 +53,7 @@ rlnormlnorm(n, meanlog1 = 0, sdlog1 = 1, meanlog2 = 3, sdlog2 = 1, r = 0.5)
 
 \item{log, log.p}{logical; if TRUE, probabilitise p are given as log(p).}
 
-\item{lower.tail}{logical; if TRUE (default), probabilities are \code{P[X ≤ x]}, otherwise, \code{P[X > x]}.}
+\item{lower.tail}{logical; if TRUE (default), probabilities are \code{P[X <= x]}, otherwise, \code{P[X > x]}.}
 
 \item{p}{vector of probabilities.}
 
