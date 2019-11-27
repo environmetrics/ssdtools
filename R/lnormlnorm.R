@@ -25,9 +25,9 @@ dlnormlnorm <- function(x, meanlog1 = 0, sdlog1 = 1, meanlog2 = 1, sdlog2 = 0, r
 qlnormlnorm <- function(p, meanlog1 = 0, sdlog1 = 1, meanlog2 = 0, sdlog2 = 1, r = 0.5){
   if(p==1){p=1-.Machine$double.eps}
   if(p==0){p=0+.Machine$double.eps}
-  minmax <- c(0+.Machine$double.eps, 10^10)#range(qlnorm(p,meanlog1, sdlog1), qlnorm(p, meanlog2, sdlog2)) 
+  minmax <- c(0+.Machine$double.eps, 10^10)
   uniroot(function(x) plnormlnorm(x, meanlog1, sdlog1, meanlog2, sdlog2, r) - p,
-               interval = minmax)$root  
+          interval = minmax)$root  
 }
 
 #' @rdname lnormlnorm
@@ -39,7 +39,9 @@ plnormlnorm <- function(q, meanlog1 = 0, sdlog1= 1, meanlog2 = 1, sdlog2 = 1, r 
 #' @rdname lnormlnorm
 #' @export
 rlnormlnorm <- function(n, meanlog1 = 0, sdlog1 = 1, meanlog2 = 1, sdlog2 = 1, r = 0.5){
-  n.lnorm1 <- round(r*n)
-  n.lnorm2 <- n-n.lnorm1
-  c(rlnorm(n=n.lnorm1, meanlog1, sdlog1), rlnorm(n=n.lnorm2, meanlog2, sdlog2))
+  n.lnorm1 <- rbinom(1, size = n, prob = r)
+  n.lnorm2 <- n - n.lnorm1
+  sample <- c(rlnorm(n=n.lnorm1, meanlog1, sdlog1), 
+              rlnorm(n=n.lnorm2, meanlog2, sdlog2))
+  sample(sample, size = n)
 }
