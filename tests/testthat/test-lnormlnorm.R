@@ -14,11 +14,26 @@
 
 context("lnormlnorm")
 
-test_that("qnormlnorm", {
+test_that("qlnormlnorm", {
   expect_equal(qlnormlnorm(0.00001, meanlog1 = -9, sdlog1 = 3, meanlog2 = 5, sdlog2 = 3,r = 0.5),
                5.49268037508074e-10)
   expect_error(qlnormlnorm(0.00001, meanlog1 = -10, sdlog1 = 3, meanlog2 = 5, sdlog2 = 3,r = 0.5),
                "values at end points not of opposite sign")
+})
+
+test_that("qlnormlnorm vectorized", {
+  expect_equal(qlnormlnorm(c(0.00001, 0.5, 0.7), meanlog1 = -9, sdlog1 = 3, meanlog2 = 5, sdlog2 = 3,r = 0.5),
+               c(5.49268037508074e-10, 0.13533122949623, 69.4069377158878))
+})
+
+test_that("qlnormlnorm zero length", {
+  expect_equal(qlnormlnorm(numeric(0), meanlog1 = -9, sdlog1 = 3, meanlog2 = 5, sdlog2 = 3,r = 0.5),
+               numeric(0))
+})
+
+test_that("qlnormlnorm missing value", {
+  expect_identical(qlnormlnorm(NA, meanlog1 = -9, sdlog1 = 3, meanlog2 = 5, sdlog2 = 3,r = 0.5),
+               NA_real_)
 })
 
 test_that("rlnormlnorm replicable etc", {
