@@ -36,6 +36,15 @@ test_that("qlnormlnorm zero length", {
                numeric(0))
 })
 
+test_that("plnormlnorm", {
+  expect_equal(plnormlnorm(1),
+               0.250674949015815)
+  expect_equal(plnormlnorm(1, log.p = TRUE),
+               log(0.250674949015815))
+  expect_equal(plnormlnorm(1, lower.tail = FALSE),
+               1 - 0.250674949015815)
+})
+
 test_that("qlnormlnorm missing value", {
   expect_identical(qlnormlnorm(NA, meanlog1 = -9, sdlog1 = 3, meanlog2 = 5, sdlog2 = 3,r = 0.5),
                NA_real_)
