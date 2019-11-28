@@ -19,6 +19,11 @@ test_that("qlnormlnorm", {
                5.49268037508074e-10)
   expect_error(qlnormlnorm(0.00001, meanlog1 = -10, sdlog1 = 3, meanlog2 = 5, sdlog2 = 3,r = 0.5),
                "values at end points not of opposite sign")
+  
+  expect_identical(qlnormlnorm(0.75, lower.tail = FALSE), qlnormlnorm(0.25))
+
+  expect_equal(qlnormlnorm(-1, log.p = TRUE),
+               qlnormlnorm(exp(-1)))
 })
 
 test_that("qlnormlnorm vectorized", {

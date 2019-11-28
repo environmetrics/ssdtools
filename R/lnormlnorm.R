@@ -39,6 +39,9 @@ plnormlnorm <- function(q, meanlog1 = 0, sdlog1= 1, meanlog2 = 3, sdlog2 = 1, r 
 #' @rdname lnormlnorm
 #' @export
 qlnormlnorm <- function(p, meanlog1 = 0, sdlog1 = 1, meanlog2 = 3, sdlog2 = 1, r = 0.5, lower.tail = TRUE, log.p = FALSE){
+  if (log.p) p <- exp(p)
+  if (!lower.tail) p <- 1 - p
+
   unirootp <- function(p, meanlog1, sdlog1, meanlog2, sdlog2, r) {
     f <- function(x, meanlog1, sdlog1, meanlog2, sdlog2, r, p) {
       plnormlnorm(exp(x), meanlog1, sdlog1, meanlog2, sdlog2, r) - p
@@ -51,8 +54,6 @@ qlnormlnorm <- function(p, meanlog1 = 0, sdlog1 = 1, meanlog2 = 3, sdlog2 = 1, r
   q[!is.na(p)] <- vapply(p[!is.na(p)], unirootp, 1, meanlog1 = meanlog1, 
               sdlog1 = sdlog1, meanlog2 = meanlog2, sdlog2 = sdlog2, 
               r = r)
-  if(!lower.tail) q <- 1 - q
-  if(log.p) return(q)
   exp(q)
 }
 
